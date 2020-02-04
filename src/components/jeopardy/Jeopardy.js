@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import our service
 import JeopardyService from "../../jeopardyService";
+import DisplayJeopardy from '../displayjeopardy/DisplayJeopardy';
 class Jeopardy extends Component {
     //set our initial state and set up our service as this.client on this component
     constructor(props) {
@@ -114,34 +115,24 @@ class Jeopardy extends Component {
 
     //display the results on the screen
     render() {
-        let categoryElement
-        if (this.state.data.category === undefined) {
-            categoryElement = <div>no category</div>
-        } else {
-            categoryElement = <div>{this.state.data.category.title}</div>
-        }
+     
 
 
 
         return (
 
-            <div>
-                <b>Category</b>{categoryElement}
-                <b>Question</b>  <p> {(this.state.data.question)} </p>
-                <b>Value</b> <p> {(this.state.data.value)}</p>
-                <b>Score</b> <p>{(this.state.score)}</p>
+            <DisplayJeopardy
+            category={this.state.data.category}
+            question={this.state.data.question}
+            value={this.state.data.value}
+            score={this.state.score}
+            handleSubmit={this.handleSubmit}
+            answer={this.state.formData.answer}
+            handleChange={this.handleChange}
+            
+            />
 
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <label htmlFor="">Answer</label>
-                        <input type="text" name="answer"
-
-                            value={this.state.formData.answer}
-                            onChange={this.handleChange} />
-                        <button>Submit Answer</button>
-                    </div>
-                </form>
-            </div>
+            
 
         );
     }
